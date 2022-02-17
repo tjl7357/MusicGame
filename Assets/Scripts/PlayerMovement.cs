@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
@@ -11,24 +12,36 @@ public class PlayerMovement : MonoBehaviour
     private InputAction moveVert;
     private InputAction moveHori;
     private Vector3 dir;
+
+    // UI Fields
+    [SerializeField] private Text healthText;
+    [SerializeField] private Text moneyText;
+    private int health;
+    private int money;
     
 
 
-
+    // Unity Awake Function
     private void Awake()
     {
         playerControls = new PlayerControls();
         playerControls.Enable();
         moveVert = playerControls.Player.MoveVert;
         moveHori = playerControls.Player.MoveHori;
+        health = 6;
+        money = 0;
     }
 
-
+    // Unity Update Function
     private void Update()
     {
         dir = Vector3.zero;
         dir.x += moveHori.ReadValue<float>();
         dir.y += moveVert.ReadValue<float>();
         gameObject.transform.position += dir * speed * Time.deltaTime;
+
+        // Updates the UI
+        healthText.text = "Health: " + health;
+        moneyText.text = "$" + money;
     }
 }

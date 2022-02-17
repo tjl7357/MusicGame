@@ -50,6 +50,7 @@ public class InstrumentManagement : MonoBehaviour
     {
         nearbyObjects.Add(collision.gameObject);
         Debug.Log("Object Added: " + collision.name);
+
     }
 
     /// <summary>
@@ -95,8 +96,6 @@ public class InstrumentManagement : MonoBehaviour
         {
             // Song of Movement (Subject To Change)
             case "132132":
-                //Debug.Log("Rock Moved");
-                //rock.GetComponent<Moveable>().Move();
                 for (int i = 0; i < nearbyObjects.Count; i++)
                 {
                     if (nearbyObjects[i].CompareTag("Moveable"))
@@ -105,6 +104,18 @@ public class InstrumentManagement : MonoBehaviour
                         song1.Play();
                         Debug.Log("Rock Moved");
                         break;
+                    }
+                }
+                break;
+
+            // Song of Lifting (Subject to Change)
+            // Make Stairs an object not on a tilemap
+            case "123123":
+                for (int i=0; i < nearbyObjects.Count; i++)
+                {
+                    if (nearbyObjects[i].CompareTag("Raisable"))
+                    {
+                        
                     }
                 }
                 break;
