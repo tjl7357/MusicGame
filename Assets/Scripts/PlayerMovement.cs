@@ -14,8 +14,6 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 dir;
 
     // UI Fields
-    [SerializeField] private Text healthText;
-    [SerializeField] private Text moneyText;
     private int health;
     private int money;
     
@@ -39,9 +37,5 @@ public class PlayerMovement : MonoBehaviour
         dir.x += moveHori.ReadValue<float>();
         dir.y += moveVert.ReadValue<float>();
         gameObject.transform.position += dir * speed * Time.deltaTime;
-
-        // Updates the UI
-        healthText.text = "Health: " + health;
-        moneyText.text = "$" + money;
     }
 }
