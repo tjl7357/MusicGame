@@ -8,12 +8,14 @@ public class PlayerMovement : MonoBehaviour
 {
     // Fields
     [SerializeField] private float speed;
+    [SerializeField] private GameObject uiCanvas;
     private PlayerControls playerControls;
     private InputAction moveVert;
     private InputAction moveHori;
     private Vector3 dir;
 
     // UI Fields
+    private UIManager uiManager;
     private int health;
     private int money;
     
@@ -26,8 +28,12 @@ public class PlayerMovement : MonoBehaviour
         playerControls.Enable();
         moveVert = playerControls.Player.MoveVert;
         moveHori = playerControls.Player.MoveHori;
-        health = 6;
+
+        // Setup UI
+        uiManager = uiCanvas.GetComponent<UIManager>();
+        health = 3;
         money = 0;
+        uiManager.UpdateHearts(health);
     }
 
     // Unity Update Function

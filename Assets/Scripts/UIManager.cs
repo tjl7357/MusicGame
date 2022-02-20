@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     // Fields
-    [SerializeField] private Text healthText;
     [SerializeField] private Text moneyText;
     [SerializeField] private Sprite fullHeart;
     [SerializeField] private Sprite halfHeart;
@@ -16,11 +15,10 @@ public class UIManager : MonoBehaviour
     private Image[] healthBar;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        healthText.text = "Health:";
         healthBar = gameObject.GetComponentsInChildren<Image>();
-        UpdateHearts(5);
+        //UpdateHearts(6);
     }
 
     // Update is called once per frame
