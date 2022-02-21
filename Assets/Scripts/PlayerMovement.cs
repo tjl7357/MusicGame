@@ -22,7 +22,7 @@ public class PlayerMovement : MonoBehaviour
 
 
     // Unity Awake Function
-    private void Awake()
+    private void Start()
     {
         playerControls = new PlayerControls();
         playerControls.Enable();
