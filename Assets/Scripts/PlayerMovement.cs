@@ -31,7 +31,7 @@ public class PlayerMovement : MonoBehaviour
 
         // Setup UI
         uiManager = uiCanvas.GetComponent<UIManager>();
-        health = 3;
+        health = 6;
         money = 0;
         uiManager.UpdateHearts(health);
     }

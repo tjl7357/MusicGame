@@ -10,15 +10,18 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Sprite fullHeart;
     [SerializeField] private Sprite halfHeart;
     [SerializeField] private Sprite emptyHeart;
-    private int health;
+    [SerializeField] private GameObject notePrefab;
+
     private int money;
+
     private Image[] healthBar;
+    private List<GameObject> notes;
 
     // Start is called before the first frame update
     void Awake()
     {
         healthBar = gameObject.GetComponentsInChildren<Image>();
-        //UpdateHearts(6);
+        notes = new List<GameObject>();
     }
 
     // Update is called once per frame
@@ -53,5 +56,28 @@ public class UIManager : MonoBehaviour
         {
             healthBar[i].sprite = emptyHeart;
         }
+    }
+
+
+    public void AddNote(int note)
+    {
+        if (notes.Count == 6) ClearNotes();
+        GameObject noteInst = Instantiate(notePrefab);
+        //noteInst.transform.parent = gameObject.transform;
+        noteInst.transform.SetParent(gameObject.transform);
+        RectTransform noteTransform = noteInst.GetComponent<RectTransform>();
+        noteTransform.anchoredPosition = new Vector3(-100 + 40 * notes.Count, -150 + note * 20, 0);
+        notes.Add(noteInst);
+    }
+
+
+    public void ClearNotes()
+    {
+        for (int i = 0; i < notes.Count; i++)
+        {
+            Destroy(notes[i]);
+        }
+
+        notes.Clear();
     }
 }

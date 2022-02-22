@@ -14,6 +14,7 @@ public class InstrumentManagement : MonoBehaviour
     // Fields
     [SerializeField] private GameObject notesObject;
     [SerializeField] private AudioSource song1;
+    [SerializeField] private UIManager uiManager;
     private PlayerControls playerControls;
     private InputAction playNote;
     private string playedSong;
@@ -76,6 +77,7 @@ public class InstrumentManagement : MonoBehaviour
         if (curNum < 4)
         {
             notes[curNum - 1].Play();
+            uiManager.AddNote(curNum);
         }
 
         // Once a full song is played, checks to see if is valid song

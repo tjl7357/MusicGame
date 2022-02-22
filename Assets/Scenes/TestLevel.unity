@@ -236,7 +236,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 160, y: 0}
+  m_AnchoredPosition: {x: 5, y: 0}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &218211855
@@ -10847,7 +10847,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 260, y: 0}
+  m_AnchoredPosition: {x: 115, y: 0}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1371829721
@@ -10971,6 +10971,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2291505050476124320, guid: fbd6147309bb1384d8112f84addb33f6, type: 3}
+      propertyPath: uiCanvas
+      value: 
+      objectReference: {fileID: 1989373679}
+    - target: {fileID: 2291505050476124320, guid: fbd6147309bb1384d8112f84addb33f6, type: 3}
       propertyPath: fullHeart
       value: 
       objectReference: {fileID: 21300000, guid: d7d74a903904a0b46a6bf50e01a4ddfc, type: 3}
@@ -11038,6 +11042,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2291505050476124348, guid: fbd6147309bb1384d8112f84addb33f6, type: 3}
+      propertyPath: uiManager
+      value: 
+      objectReference: {fileID: 1989373684}
     - target: {fileID: 2291505050476124349, guid: fbd6147309bb1384d8112f84addb33f6, type: 3}
       propertyPath: m_Name
       value: Player
@@ -13901,7 +13909,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 210, y: 0}
+  m_AnchoredPosition: {x: 60, y: 0}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1988740373
@@ -14059,11 +14067,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 371ee3afb9246314a95705e179cc96d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthText: {fileID: 1366349596}
   moneyText: {fileID: 29317969}
   fullHeart: {fileID: 21300000, guid: d7d74a903904a0b46a6bf50e01a4ddfc, type: 3}
   halfHeart: {fileID: 21300000, guid: a1f1ed93414cfb043911b19824a9a649, type: 3}
   emptyHeart: {fileID: 21300000, guid: f0292bdaf253cdf4fbc96a96bdd2b612, type: 3}
+  notePrefab: {fileID: 1253414401260901823, guid: cc75b49a7881fdb499d38fe1b9b9a916, type: 3}
 --- !u!1001 &681370163491944957
 PrefabInstance:
   m_ObjectHideFlags: 0
