@@ -22,7 +22,7 @@ public class PlayerMovement : MonoBehaviour
 
 
     // Unity Awake Function
-    private void Start()
+    private void Awake()
     {
         playerControls = new PlayerControls();
         playerControls.Enable();
@@ -33,6 +33,12 @@ public class PlayerMovement : MonoBehaviour
         uiManager = uiCanvas.GetComponent<UIManager>();
         health = 6;
         money = 0;
+        Debug.Log(uiManager);
+    }
+
+    // Unity Start Function
+    private void Start()
+    {
         uiManager.UpdateHearts(health);
     }
 

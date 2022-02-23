@@ -124,7 +124,7 @@ public class InstrumentManagement : MonoBehaviour
 
             // If the player plays notes that don't represent a song
             default:
-                Debug.Log("You Played Nothing");
+                uiManager.UpdateDialog("No Song Played");
                 break;
         }
     }

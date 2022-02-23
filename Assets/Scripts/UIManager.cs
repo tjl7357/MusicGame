@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class UIManager : MonoBehaviour
 {
@@ -10,18 +11,27 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Sprite fullHeart;
     [SerializeField] private Sprite halfHeart;
     [SerializeField] private Sprite emptyHeart;
+
     [SerializeField] private GameObject notePrefab;
+    [SerializeField] private GameObject heartPrefab;
+    [SerializeField] private GameObject dialogText;
+    [SerializeField] private GameObject dialogImg;
 
     private int money;
-
     private Image[] healthBar;
     private List<GameObject> notes;
+
+    private TextMeshProUGUI dialogTextElement;
+    private Image dialogBack;
 
     // Start is called before the first frame update
     void Awake()
     {
-        healthBar = gameObject.GetComponentsInChildren<Image>();
+        CreateHealthBar(3);
         notes = new List<GameObject>();
+
+        dialogTextElement = dialogText.GetComponent<TextMeshProUGUI>();
+        dialogBack = dialogImg.GetComponent<Image>();
     }
 
     // Update is called once per frame
@@ -29,6 +39,26 @@ public class UIManager : MonoBehaviour
     {
         // Updates the UI
         moneyText.text = "$" + money;
+    }
+
+    /// <summary>
+    /// Creates the health bar images based on how many hearts the player has
+    /// </summary>
+    /// <param name="num">The number of heart icons to make</param>
+    private void CreateHealthBar(int num)
+    {
+        Image[] hearts = new Image[num];
+        for (int i = 0; i < num; i++)
+        {
+            GameObject heartInst = Instantiate(heartPrefab);
+            heartInst.transform.SetParent(gameObject.transform);
+            RectTransform heartTransform = heartInst.GetComponent<RectTransform>();
+            heartTransform.anchoredPosition = new Vector3(5 + 55 * i, 0, 0);
+            heartTransform.localScale = new Vector3(1f, 1f);
+            hearts[i] = heartInst.GetComponent<Image>();
+        }
+
+        healthBar = hearts;
     }
 
     /// <summary>
@@ -58,7 +88,10 @@ public class UIManager : MonoBehaviour
         }
     }
 
-
+    /// <summary>
+    /// Creates a note and adds it to the UI
+    /// </summary>
+    /// <param name="note">The number the note is representing</param>
     public void AddNote(int note)
     {
         if (notes.Count == 6) ClearNotes();
@@ -70,7 +103,9 @@ public class UIManager : MonoBehaviour
         notes.Add(noteInst);
     }
 
-
+    /// <summary>
+    /// Clears all of the notes from the list and destorys them.
+    /// </summary>
     public void ClearNotes()
     {
         for (int i = 0; i < notes.Count; i++)
@@ -79,5 +114,15 @@ public class UIManager : MonoBehaviour
         }
 
         notes.Clear();
+    }
+
+    /// <summary>
+    /// Updates the dialog in the dialog box
+    /// </summary>
+    /// <param name="dialog">The dialog to add</param>
+    public void UpdateDialog(string dialog)
+    {
+        dialogBack.enabled = true;
+        dialogTextElement.text = dialog;
     }
 }
