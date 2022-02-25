@@ -246,6 +246,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   notesObject: {fileID: 2291505050791050910}
   song1: {fileID: 2291505049400512844}
+  uiManager: {fileID: 0}
 --- !u!114 &2291505050476124320
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -259,6 +260,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
+  uiCanvas: {fileID: 0}
 --- !u!50 &2291505050476124327
 Rigidbody2D:
   serializedVersion: 4
