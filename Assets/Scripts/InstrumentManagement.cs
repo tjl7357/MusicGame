@@ -107,6 +107,8 @@ public class InstrumentManagement : MonoBehaviour
                         Debug.Log("Rock Moved");
                         break;
                     }
+
+                    uiManager.UpdateDialog("Song Of Movement Played");
                 }
                 break;
 
@@ -119,6 +121,8 @@ public class InstrumentManagement : MonoBehaviour
                     {
                         
                     }
+
+                    uiManager.UpdateDialog("Song of Lifting Played");
                 }
                 break;
 

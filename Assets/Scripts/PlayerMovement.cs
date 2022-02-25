@@ -32,14 +32,15 @@ public class PlayerMovement : MonoBehaviour
         // Setup UI
         uiManager = uiCanvas.GetComponent<UIManager>();
         health = 6;
-        money = 0;
-        Debug.Log(uiManager);
+        money = 534;
+        
     }
 
     // Unity Start Function
     private void Start()
     {
         uiManager.UpdateHearts(health);
+        uiManager.UpdateMoney(money);
     }
 
     // Unity Update Function

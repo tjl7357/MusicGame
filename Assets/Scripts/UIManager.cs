@@ -7,19 +7,23 @@ using TMPro;
 public class UIManager : MonoBehaviour
 {
     // Fields
-    [SerializeField] private Text moneyText;
     [SerializeField] private Sprite fullHeart;
     [SerializeField] private Sprite halfHeart;
     [SerializeField] private Sprite emptyHeart;
 
+    [SerializeField] private GameObject moneyText;
+
     [SerializeField] private GameObject notePrefab;
     [SerializeField] private GameObject heartPrefab;
+
     [SerializeField] private GameObject dialogText;
     [SerializeField] private GameObject dialogImg;
 
     private int money;
     private Image[] healthBar;
     private List<GameObject> notes;
+
+    private TextMeshProUGUI moneyTextElement;
 
     private TextMeshProUGUI dialogTextElement;
     private Image dialogBack;
@@ -30,6 +34,7 @@ public class UIManager : MonoBehaviour
         CreateHealthBar(3);
         notes = new List<GameObject>();
 
+        moneyTextElement = moneyText.GetComponent<TextMeshProUGUI>();
         dialogTextElement = dialogText.GetComponent<TextMeshProUGUI>();
         dialogBack = dialogImg.GetComponent<Image>();
     }
@@ -37,8 +42,7 @@ public class UIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Updates the UI
-        moneyText.text = "$" + money;
+        
     }
 
     /// <summary>
@@ -89,6 +93,15 @@ public class UIManager : MonoBehaviour
     }
 
     /// <summary>
+    /// Sets the money value for the UI
+    /// </summary>
+    /// <param name="money">The value to set the money to</param>
+    public void UpdateMoney(int money)
+    {   
+        moneyTextElement.text = money.ToString("D4");
+    }
+
+    /// <summary>
     /// Creates a note and adds it to the UI
     /// </summary>
     /// <param name="note">The number the note is representing</param>
@@ -96,11 +109,13 @@ public class UIManager : MonoBehaviour
     {
         if (notes.Count == 6) ClearNotes();
         GameObject noteInst = Instantiate(notePrefab);
-        //noteInst.transform.parent = gameObject.transform;
         noteInst.transform.SetParent(gameObject.transform);
         RectTransform noteTransform = noteInst.GetComponent<RectTransform>();
         noteTransform.anchoredPosition = new Vector3(-100 + 40 * notes.Count, -150 + note * 20, 0);
         notes.Add(noteInst);
+
+        // Triggers the Coroutine
+        if (notes.Count == 6) StartCoroutine(MusicClear(2.0f));
     }
 
     /// <summary>
@@ -124,5 +139,27 @@ public class UIManager : MonoBehaviour
     {
         dialogBack.enabled = true;
         dialogTextElement.text = dialog;
+        StartCoroutine(DialogCooldown(2.0f));
+    }
+
+    /// <summary>
+    /// Waits a certain amount of time and then clears the dialog
+    /// </summary>
+    /// <param name="time">The time to wait</param>
+    IEnumerator DialogCooldown(float time)
+    {
+        yield return new WaitForSecondsRealtime(time);
+        dialogBack.enabled = false;
+        dialogTextElement.text = "";
+    }
+
+    /// <summary>
+    /// Waits a certain amount of time and then clears the notes if the notes are still full
+    /// </summary>
+    /// <param name="time">The time to wait</param>
+    IEnumerator MusicClear(float time)
+    {
+        yield return new WaitForSecondsRealtime(time);
+        if (notes.Count == 6) ClearNotes();
     }
 }
