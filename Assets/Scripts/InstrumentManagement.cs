@@ -51,7 +51,6 @@ public class InstrumentManagement : MonoBehaviour
     {
         nearbyObjects.Add(collision.gameObject);
         Debug.Log("Object Added: " + collision.name);
-
     }
 
     /// <summary>
@@ -102,8 +101,7 @@ public class InstrumentManagement : MonoBehaviour
                 {
                     if (nearbyObjects[i].CompareTag("Moveable"))
                     {
-                        nearbyObjects[i].GetComponent<Moveable>().Move();
-                        song1.Play();
+                        StartCoroutine(DelayAudio(song1, nearbyObjects[i]));
                         Debug.Log("Rock Moved");
                         break;
                     }
@@ -131,5 +129,17 @@ public class InstrumentManagement : MonoBehaviour
                 uiManager.UpdateDialog("No Song Played");
                 break;
         }
+    }
+
+    /// <summary>
+    /// Delays the playing of an audio source
+    /// </summary>
+    /// <param name="source">The AudioSource to play music from</param>
+    IEnumerator DelayAudio(AudioSource source, GameObject item)
+    {
+        yield return new WaitForSecondsRealtime(1.0f);
+        source.Play();
+        item.GetComponent<Moveable>().Move();
+        Debug.Log("PlaySong");
     }
 }

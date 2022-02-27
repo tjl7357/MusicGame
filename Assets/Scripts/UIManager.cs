@@ -112,6 +112,7 @@ public class UIManager : MonoBehaviour
         noteInst.transform.SetParent(gameObject.transform);
         RectTransform noteTransform = noteInst.GetComponent<RectTransform>();
         noteTransform.anchoredPosition = new Vector3(-100 + 40 * notes.Count, -150 + note * 20, 0);
+        noteTransform.localScale = new Vector3(1.0f, 1.0f);
         notes.Add(noteInst);
 
         // Triggers the Coroutine
