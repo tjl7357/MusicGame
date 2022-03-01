@@ -10927,6 +10927,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1366349594}
   m_CullTransparentMesh: 1
+--- !u!82 &1368853719 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 2291505049400512844, guid: fbd6147309bb1384d8112f84addb33f6, type: 3}
+  m_PrefabInstance: {fileID: 1821294262}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1454774019
 GameObject:
   m_ObjectHideFlags: 0
@@ -11084,6 +11089,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2291505049400512844, guid: fbd6147309bb1384d8112f84addb33f6, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 2291505050476124320, guid: fbd6147309bb1384d8112f84addb33f6, type: 3}
       propertyPath: uiCanvas
       value: 
@@ -11161,9 +11170,21 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2291505050476124348, guid: fbd6147309bb1384d8112f84addb33f6, type: 3}
+      propertyPath: songs
+      value: 
+      objectReference: {fileID: 1368853719}
+    - target: {fileID: 2291505050476124348, guid: fbd6147309bb1384d8112f84addb33f6, type: 3}
       propertyPath: uiManager
       value: 
       objectReference: {fileID: 1989373684}
+    - target: {fileID: 2291505050476124348, guid: fbd6147309bb1384d8112f84addb33f6, type: 3}
+      propertyPath: songClips.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2291505050476124348, guid: fbd6147309bb1384d8112f84addb33f6, type: 3}
+      propertyPath: songClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: d9792f00767a6fa449e0ee58a9b7fba2, type: 3}
     - target: {fileID: 2291505050476124349, guid: fbd6147309bb1384d8112f84addb33f6, type: 3}
       propertyPath: m_Name
       value: Player

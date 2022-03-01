@@ -13,8 +13,9 @@ public class InstrumentManagement : MonoBehaviour
 {
     // Fields
     [SerializeField] private GameObject notesObject;
-    [SerializeField] private AudioSource song1;
+    [SerializeField] private AudioSource songs;
     [SerializeField] private UIManager uiManager;
+    [SerializeField] private AudioClip[] songClips;
     private PlayerControls playerControls;
     private InputAction playNote;
     private string playedSong;
@@ -81,7 +82,7 @@ public class InstrumentManagement : MonoBehaviour
 
         // Once a full song is played, checks to see if is valid song
         if (playedSong.Length == 6)
-        {
+        { 
             Debug.Log(playedSong);
             CheckSong();
             playedSong = "";
@@ -97,30 +98,29 @@ public class InstrumentManagement : MonoBehaviour
         {
             // Song of Movement (Subject To Change)
             case "132132":
+                uiManager.UpdateDialog("Song Of Movement Played");
+                StartCoroutine(DelayAudio(songClips[0]));
                 for (int i = 0; i < nearbyObjects.Count; i++)
                 {
                     if (nearbyObjects[i].CompareTag("Moveable"))
                     {
-                        StartCoroutine(DelayAudio(song1, nearbyObjects[i]));
+                        nearbyObjects[i].GetComponent<Moveable>().Move();
                         Debug.Log("Rock Moved");
                         break;
                     }
-
-                    uiManager.UpdateDialog("Song Of Movement Played");
                 }
                 break;
 
             // Song of Lifting (Subject to Change)
             // Make Stairs an object not on a tilemap
             case "123123":
+                uiManager.UpdateDialog("Song of Lifting Played");
                 for (int i=0; i < nearbyObjects.Count; i++)
                 {
                     if (nearbyObjects[i].CompareTag("Raisable"))
                     {
                         
                     }
-
-                    uiManager.UpdateDialog("Song of Lifting Played");
                 }
                 break;
 
@@ -135,11 +135,10 @@ public class InstrumentManagement : MonoBehaviour
     /// Delays the playing of an audio source
     /// </summary>
     /// <param name="source">The AudioSource to play music from</param>
-    IEnumerator DelayAudio(AudioSource source, GameObject item)
+    IEnumerator DelayAudio(AudioClip clip)
     {
         yield return new WaitForSecondsRealtime(1.0f);
-        source.Play();
-        item.GetComponent<Moveable>().Move();
+        songs.PlayOneShot(clip);
         Debug.Log("PlaySong");
     }
 }
