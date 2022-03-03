@@ -11178,6 +11178,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1989373684}
     - target: {fileID: 2291505050476124348, guid: fbd6147309bb1384d8112f84addb33f6, type: 3}
+      propertyPath: songSuccess
+      value: 
+      objectReference: {fileID: 8300000, guid: c6592f38842aa1845a95c52077d748c6, type: 3}
+    - target: {fileID: 2291505050476124348, guid: fbd6147309bb1384d8112f84addb33f6, type: 3}
       propertyPath: songClips.Array.size
       value: 1
       objectReference: {fileID: 0}

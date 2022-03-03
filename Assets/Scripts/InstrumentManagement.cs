@@ -16,6 +16,7 @@ public class InstrumentManagement : MonoBehaviour
     [SerializeField] private AudioSource songs;
     [SerializeField] private UIManager uiManager;
     [SerializeField] private AudioClip[] songClips;
+    [SerializeField] private AudioClip songSuccess;
     private PlayerControls playerControls;
     private InputAction playNote;
     private string playedSong;
@@ -104,6 +105,7 @@ public class InstrumentManagement : MonoBehaviour
                 {
                     if (nearbyObjects[i].CompareTag("Moveable"))
                     {
+                        songs.PlayOneShot(songSuccess);
                         nearbyObjects[i].GetComponent<Moveable>().Move();
                         Debug.Log("Rock Moved");
                         break;
