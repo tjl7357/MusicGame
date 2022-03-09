@@ -53,6 +53,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""c00f257e-1d56-4b8b-95e4-42c8146cd46d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -187,6 +196,17 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""action"": ""MoveHori"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fcf109bc-67c5-45b3-a2c1-a9f4ddd7ccc0"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -198,6 +218,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_Player_PlayNote = m_Player.FindAction("PlayNote", throwIfNotFound: true);
         m_Player_MoveVert = m_Player.FindAction("MoveVert", throwIfNotFound: true);
         m_Player_MoveHori = m_Player.FindAction("MoveHori", throwIfNotFound: true);
+        m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -260,6 +281,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_PlayNote;
     private readonly InputAction m_Player_MoveVert;
     private readonly InputAction m_Player_MoveHori;
+    private readonly InputAction m_Player_Interact;
     public struct PlayerActions
     {
         private @PlayerControls m_Wrapper;
@@ -267,6 +289,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public InputAction @PlayNote => m_Wrapper.m_Player_PlayNote;
         public InputAction @MoveVert => m_Wrapper.m_Player_MoveVert;
         public InputAction @MoveHori => m_Wrapper.m_Player_MoveHori;
+        public InputAction @Interact => m_Wrapper.m_Player_Interact;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -285,6 +308,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @MoveHori.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMoveHori;
                 @MoveHori.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMoveHori;
                 @MoveHori.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMoveHori;
+                @Interact.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
+                @Interact.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
+                @Interact.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -298,6 +324,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @MoveHori.started += instance.OnMoveHori;
                 @MoveHori.performed += instance.OnMoveHori;
                 @MoveHori.canceled += instance.OnMoveHori;
+                @Interact.started += instance.OnInteract;
+                @Interact.performed += instance.OnInteract;
+                @Interact.canceled += instance.OnInteract;
             }
         }
     }
@@ -307,5 +336,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnPlayNote(InputAction.CallbackContext context);
         void OnMoveVert(InputAction.CallbackContext context);
         void OnMoveHori(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
     }
 }

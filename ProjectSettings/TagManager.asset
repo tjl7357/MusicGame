@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Moveable
   - Raisable
+  - Interactable
+  - Chest
   layers:
   - Default
   - TransparentFX

@@ -17,18 +17,19 @@ public class InstrumentManagement : MonoBehaviour
     [SerializeField] private UIManager uiManager;
     [SerializeField] private AudioClip[] songClips;
     [SerializeField] private AudioClip songSuccess;
+    private PlayerMovement playerMove;
     private PlayerControls playerControls;
     private InputAction playNote;
     private string playedSong;
-    private List<GameObject> nearbyObjects;
+    
     private AudioSource[] notes;
 
     // Unity Awake function
     private void Awake()
     {
+        playerMove = GameObject.FindWithTag("Player").GetComponent<PlayerMovement>();
         playerControls = new PlayerControls();
         playNote = playerControls.Player.PlayNote;
-        nearbyObjects = new List<GameObject>(2);
         notes = notesObject.GetComponents<AudioSource>();
     }
 
@@ -51,7 +52,7 @@ public class InstrumentManagement : MonoBehaviour
     /// </summary>
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        nearbyObjects.Add(collision.gameObject);
+        playerMove.nearbyObjects.Add(collision.gameObject);
         Debug.Log("Object Added: " + collision.name);
     }
 
@@ -60,7 +61,7 @@ public class InstrumentManagement : MonoBehaviour
     /// </summary>
     private void OnTriggerExit2D(Collider2D collision)
     {
-        nearbyObjects.Remove(collision.gameObject);
+        playerMove.nearbyObjects.Remove(collision.gameObject);
         Debug.Log("Object Removed: " + collision.name);
     }
 
@@ -101,12 +102,12 @@ public class InstrumentManagement : MonoBehaviour
             case "132132":
                 uiManager.UpdateDialog("Song Of Movement Played");
                 StartCoroutine(DelayAudio(songClips[0]));
-                for (int i = 0; i < nearbyObjects.Count; i++)
+                for (int i = 0; i < playerMove.nearbyObjects.Count; i++)
                 {
-                    if (nearbyObjects[i].CompareTag("Moveable"))
+                    if (playerMove.nearbyObjects[i].CompareTag("Moveable"))
                     {
                         songs.PlayOneShot(songSuccess);
-                        nearbyObjects[i].GetComponent<Moveable>().Move();
+                        playerMove.nearbyObjects[i].GetComponent<Moveable>().Move();
                         Debug.Log("Rock Moved");
                         break;
                     }
@@ -117,9 +118,9 @@ public class InstrumentManagement : MonoBehaviour
             // Make Stairs an object not on a tilemap
             case "123123":
                 uiManager.UpdateDialog("Song of Lifting Played");
-                for (int i=0; i < nearbyObjects.Count; i++)
+                for (int i=0; i < playerMove.nearbyObjects.Count; i++)
                 {
-                    if (nearbyObjects[i].CompareTag("Raisable"))
+                    if (playerMove.nearbyObjects[i].CompareTag("Raisable"))
                     {
                         
                     }
