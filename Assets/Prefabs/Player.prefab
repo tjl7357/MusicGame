@@ -41,7 +41,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: d9792f00767a6fa449e0ee58a9b7fba2, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -137,14 +137,13 @@ GameObject:
   m_Component:
   - component: {fileID: 2291505050476124321}
   - component: {fileID: 2291505050476124322}
-  - component: {fileID: 2291505050476124323}
   - component: {fileID: 2291505050476124348}
   - component: {fileID: 2291505050476124320}
   - component: {fileID: 2291505050476124327}
   - component: {fileID: 2291505050476124326}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -216,22 +215,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!58 &2291505050476124323
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2291505050476124349}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 2
 --- !u!114 &2291505050476124348
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -245,8 +228,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   notesObject: {fileID: 2291505050791050910}
-  song1: {fileID: 2291505049400512844}
+  songs: {fileID: 2291505049400512844}
   uiManager: {fileID: 0}
+  songClips:
+  - {fileID: 8300000, guid: d9792f00767a6fa449e0ee58a9b7fba2, type: 3}
+  songSuccess: {fileID: 8300000, guid: c6592f38842aa1845a95c52077d748c6, type: 3}
 --- !u!114 &2291505050476124320
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -261,6 +247,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   uiCanvas: {fileID: 0}
+  nearbyObjects: []
 --- !u!50 &2291505050476124327
 Rigidbody2D:
   serializedVersion: 4
@@ -289,7 +276,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2291505050476124349}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -357,7 +344,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 2.5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2

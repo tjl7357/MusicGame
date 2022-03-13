@@ -15,18 +15,34 @@ public class PlayerMovement : MonoBehaviour
     private InputAction moveHori;
     private InputAction interact;
     private Vector3 dir;
+    private bool damageable;
 
     // UI Fields
     private UIManager uiManager;
     private int health;
     private int money;
-    
+
+    // Death fields
+    private Vector3 returnPosition;
+
+
+    // Properties
+    public bool Damageable
+    {
+        get { return damageable; }
+    }
+
+    public Vector3 ReturnPosition
+    {
+        set { returnPosition = value; } // NOTE: Should only be adjusted by checkpoints
+    }
 
 
     // Unity Awake Function
     private void Awake()
     {
         nearbyObjects = new List<GameObject>(2);
+        damageable = true;
 
         playerControls = new PlayerControls();
         playerControls.Enable();
@@ -38,8 +54,10 @@ public class PlayerMovement : MonoBehaviour
         // Setup UI
         uiManager = uiCanvas.GetComponent<UIManager>();
         health = 6;
-        money = 534;
-        
+        money = 0;
+
+        // Starting return position
+        returnPosition = gameObject.transform.position;
     }
 
     // Unity Start Function
@@ -67,7 +85,24 @@ public class PlayerMovement : MonoBehaviour
         uiManager.UpdateMoney(money);
     }
 
+    // Adds or subtracts a certain amount of health from the player
+    public void UpdateHealth(int update)
+    {
+        if (update < 0 && damageable)
+        {
+            damageable = false;
+            StartCoroutine(DmgInvuln(3.0f));
+            health += update;
+        }
+        else if (update > 0)
+        {
+            health += update;
+        }
+        uiManager.UpdateHearts(health);
+        if (health <= 0) PlayerDeath();
+    }
 
+    // Keypress that triggers an interactable object
     private void Interact(InputAction.CallbackContext context)
     {
         Debug.Log("E Pressed");
@@ -80,5 +115,19 @@ public class PlayerMovement : MonoBehaviour
                 break;
             }
         }
+    }
+
+
+    private void PlayerDeath()
+    {
+        uiManager.UpdateDialog("You Have Died!");
+        gameObject.transform.position = returnPosition;
+    }
+
+    /// Damage invlun coroutine
+    IEnumerator DmgInvuln(float time)
+    {
+        yield return new WaitForSecondsRealtime(time);
+        damageable = true;
     }
 }

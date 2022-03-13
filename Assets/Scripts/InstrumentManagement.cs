@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-// Elements to Add
-//    - Sound Effects
-//    - Limiting playable notes
-//    - Limitng playable songs (Maybe, maybe not, maybe selective)
-//    - Add sound effects
+// Enum to limit what notes the player can play
+public enum Instrument
+{
+    NoInstrument = 0,
+    InstrumentBase = 3,
+    FirstAttachment = 4,
+    SecondAttachment = 5,
+    FullInstrument = 6
+}
 
 public class InstrumentManagement : MonoBehaviour
 {
@@ -17,12 +21,21 @@ public class InstrumentManagement : MonoBehaviour
     [SerializeField] private UIManager uiManager;
     [SerializeField] private AudioClip[] songClips;
     [SerializeField] private AudioClip songSuccess;
+    private Instrument curInstrument;
     private PlayerMovement playerMove;
     private PlayerControls playerControls;
     private InputAction playNote;
     private string playedSong;
     
     private AudioSource[] notes;
+
+
+    public Instrument CurInstrument
+    {
+        get { return curInstrument; }
+        set { curInstrument = value; }
+    }
+
 
     // Unity Awake function
     private void Awake()
@@ -31,6 +44,7 @@ public class InstrumentManagement : MonoBehaviour
         playerControls = new PlayerControls();
         playNote = playerControls.Player.PlayNote;
         notes = notesObject.GetComponents<AudioSource>();
+        curInstrument = Instrument.NoInstrument;
     }
 
     // Unity OnEnable function
@@ -71,24 +85,29 @@ public class InstrumentManagement : MonoBehaviour
     /// <param name="context">The context of the note played</param>
     private void NotePlayed(InputAction.CallbackContext context)
     {
-        // Parses out the number and adds to song
-        int curNum;
-        int.TryParse(context.control.name, out curNum);
-        playedSong += curNum;
-
-        if (curNum < 4)
+        if (curInstrument != Instrument.NoInstrument)
         {
-            notes[curNum - 1].Play();
-            uiManager.AddNote(curNum);
-        }
+            // Parses out the number and adds to song
+            int curNum;
+            int.TryParse(context.control.name, out curNum);
 
-        // Once a full song is played, checks to see if is valid song
-        if (playedSong.Length == 6)
-        { 
-            Debug.Log(playedSong);
-            CheckSong();
-            playedSong = "";
+            if (curNum <= (int)curInstrument)
+            {
+                notes[curNum - 1].Play();
+                uiManager.AddNote(curNum);
+                playedSong += curNum;
+
+                // Once a full song is played, checks to see if is valid song
+                if (playedSong.Length == 6)
+                {
+                    Debug.Log(playedSong);
+                    CheckSong();
+                    playedSong = "";
+                }
+            }
         }
+        else uiManager.UpdateDialog("You Have No Instrument to Play");
+        
     }
 
     /// <summary>
