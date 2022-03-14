@@ -139,5 +139,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72fbb9c3b89432248a930c5dfa822c53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moneyCount: 10
+  moneyCount: 0
   openedSprite: {fileID: 21300000, guid: a0b9461542f82b242b30f02643a96350, type: 3}
