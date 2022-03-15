@@ -7,6 +7,7 @@ public class InstrumentChest : Interactable
     // Fields
     [SerializeField] private Instrument storedInstrument;
     [SerializeField] private Sprite openedSprite;
+    [SerializeField] private UIManager uiManager;
     private InstrumentManagement playerRef;
     private SpriteRenderer spriteRenderer;
     private bool opened;
@@ -29,6 +30,7 @@ public class InstrumentChest : Interactable
         {
             playerRef.CurInstrument = storedInstrument;
             spriteRenderer.sprite = openedSprite;
+            uiManager.UpdateDialog($"Picked Up {storedInstrument.ToString()}");
             opened = true;
         }
     }

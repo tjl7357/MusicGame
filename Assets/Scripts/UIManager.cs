@@ -27,6 +27,8 @@ public class UIManager : MonoBehaviour
 
     private TextMeshProUGUI dialogTextElement;
     private Image dialogBack;
+    private bool oldDialog = false;
+    private bool dialogRunning = false;
 
     // Start is called before the first frame update
     void Awake()
@@ -140,6 +142,8 @@ public class UIManager : MonoBehaviour
     {
         dialogBack.enabled = true;
         dialogTextElement.text = dialog;
+        if (dialogRunning) oldDialog = true;
+        dialogRunning = true;
         StartCoroutine(DialogCooldown(2.0f));
     }
 
@@ -150,8 +154,13 @@ public class UIManager : MonoBehaviour
     IEnumerator DialogCooldown(float time)
     {
         yield return new WaitForSecondsRealtime(time);
-        dialogBack.enabled = false;
-        dialogTextElement.text = "";
+        if (!oldDialog)
+        {
+            dialogBack.enabled = false;
+            dialogTextElement.text = "";
+        }
+        oldDialog = false;
+        dialogRunning = false;
     }
 
     /// <summary>

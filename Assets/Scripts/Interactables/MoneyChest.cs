@@ -7,6 +7,7 @@ public class MoneyChest : Interactable
     // Fields
     [SerializeField] private int moneyCount;
     [SerializeField] private Sprite openedSprite;
+    [SerializeField] private UIManager uiManager;
     private PlayerMovement playerRef;
     private SpriteRenderer spriteRenderer;
     private bool opened;
@@ -27,6 +28,7 @@ public class MoneyChest : Interactable
         {
             playerRef.UpdateMoney(moneyCount);
             spriteRenderer.sprite = openedSprite;
+            uiManager.UpdateDialog($"You Found {moneyCount} Coins!");
             opened = true;
         }
     }
