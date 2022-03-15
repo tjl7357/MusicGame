@@ -7,7 +7,7 @@ public class MoneyChest : Interactable
     // Fields
     [SerializeField] private int moneyCount;
     [SerializeField] private Sprite openedSprite;
-    [SerializeField] private UIManager uiManager;
+    private UIManager uiManager;
     private PlayerMovement playerRef;
     private SpriteRenderer spriteRenderer;
     private bool opened;
@@ -16,6 +16,7 @@ public class MoneyChest : Interactable
     private void Awake()
     {
         playerRef = GameObject.FindWithTag("Player").GetComponent<PlayerMovement>();
+        uiManager = GameObject.Find("PlayerUI").GetComponent<UIManager>();
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         opened = false;
     }

@@ -7,7 +7,7 @@ public class InstrumentChest : Interactable
     // Fields
     [SerializeField] private Instrument storedInstrument;
     [SerializeField] private Sprite openedSprite;
-    [SerializeField] private UIManager uiManager;
+    private UIManager uiManager;
     private InstrumentManagement playerRef;
     private SpriteRenderer spriteRenderer;
     private bool opened;
@@ -18,6 +18,7 @@ public class InstrumentChest : Interactable
     void Start()
     {
         playerRef = GameObject.FindWithTag("Player").GetComponent<InstrumentManagement>();
+        uiManager = GameObject.Find("PlayerUI").GetComponent<UIManager>();
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         opened = false;
     }

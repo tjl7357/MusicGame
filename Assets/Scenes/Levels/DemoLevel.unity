@@ -5917,6 +5917,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2858923363054686442, guid: 19a2995037d420e4fa527ca79a6a9142, type: 3}
+      propertyPath: moneyCount
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 6750314287913225204, guid: 19a2995037d420e4fa527ca79a6a9142, type: 3}
       propertyPath: m_Name
       value: MoneyChest (3)
